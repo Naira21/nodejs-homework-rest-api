@@ -2,7 +2,8 @@ import { getContactById } from "../../model/contacts/index.js";
 
 export const getContactsByID = async (req, res, next) => {
   const { id } = req.params;
-  const contactById = await getContactById(id);
+  const { id: userId } = req.user;
+  const contactById = await getContactById(userId, id);
   if (contactById) {
     return res
       .status(200)

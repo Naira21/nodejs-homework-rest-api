@@ -2,7 +2,8 @@ import { updateContact } from "../../model/contacts/index.js";
 
 export const renewedContact = async (req, res, next) => {
   const { id } = req.params;
-  const modifiedContact = await updateContact(id, req.body);
+  const { id: userId } = req.user;
+  const modifiedContact = await updateContact(userId, id, req.body);
   if (modifiedContact) {
     return res.status(200).json({
       status: "success",

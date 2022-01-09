@@ -4,6 +4,7 @@ import {
   renewToken,
 } from "../../model/users/index.js";
 import jwt from "jsonwebtoken";
+import {} from "dotenv/config";
 
 const secret = process.env.SECRET;
 

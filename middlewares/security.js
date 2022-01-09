@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { findById } from "../model/users/index.js";
+import {} from "dotenv/config";
+
 const secret = process.env.SECRET;
 
 const verifyToken = (token) => {

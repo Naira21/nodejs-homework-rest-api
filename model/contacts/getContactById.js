@@ -1,7 +1,7 @@
-import ContactModel from "../contactsScheme";
+import ContactModel from "../contactsScheme.js";
 
-const getContactById = async (contactId) => {
-  const result = await ContactModel.findById(contactId);
+const getContactById = async (userId, contactId) => {
+  const result = await ContactModel.findOne({ _id: contactId, owner: userId });
   return result;
 };
 

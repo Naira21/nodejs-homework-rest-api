@@ -1,5 +1,5 @@
-export { listContacts } from "./listContacts";
-export { getContactById } from "./getContactById";
-export { removeContact } from "./removeContact";
-export { addContact } from "./addContact";
-export { updateContact } from "./updateContact";
+export { listContacts } from "./listContacts.js";
+export { getContactById } from "./getContactById.js";
+export { removeContact } from "./removeContact.js";
+export { addContact } from "./addContact.js";
+export { updateContact } from "./updateContact.js";

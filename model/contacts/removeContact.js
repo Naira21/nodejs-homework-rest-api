@@ -1,6 +1,9 @@
-import ContactModel from "../contactsScheme";
+import ContactModel from "../contactsScheme.js";
 
-export const removeContact = async (contactId) => {
-  const result = await ContactModel.findByIdAndRemove(contactId);
+export const removeContact = async (userId, contactId) => {
+  const result = await ContactModel.findOneAndRemove({
+    _id: contactId,
+    owner: userId,
+  });
   return result;
 };

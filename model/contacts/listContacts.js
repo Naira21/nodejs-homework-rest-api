@@ -1,15 +1,12 @@
-import ContactModel from "../contactsScheme";
+import ContactModel from "../contactsScheme.js";
 
-const listContacts = async ({
-  sortBy,
-  sortByDesc,
-  filter,
-  limit = 15,
-  skip = 0,
-}) => {
+const listContacts = async (
+  userId,
+  { sortBy, sortByDesc, filter, limit = 15, skip = 0 }
+) => {
   let sortCriteria = null;
-  const total = await ContactModel.find().countDocuments();
-  let result = ContactModel.find();
+  const total = await ContactModel.find({ owner: userId }).countDocuments();
+  let result = ContactModel.find({ owner: userId });
   if (sortBy) {
     sortCriteria = { [`${sortBy}`]: 1 };
   }

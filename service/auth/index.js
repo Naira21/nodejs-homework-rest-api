@@ -10,11 +10,12 @@ const secret = process.env.SECRET;
 
 class AuthService {
   async create(body) {
-    const { id, email, subscription } = await createUser(body);
+    const { id, email, subscription, avatar } = await createUser(body);
     return {
       id,
       email,
       subscription,
+      avatar,
     };
   }
 

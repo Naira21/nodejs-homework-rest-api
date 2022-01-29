@@ -20,6 +20,9 @@ export const login = async (req, res, next) => {
   res.status(200).json({
     Status: "200 OK",
     ContentType: "application/json",
-    ResponseBody: { token, user: { subscription, email, avatar } },
+    ResponseBody: {
+      token,
+      user: { subscription, email, avatar },
+    },
   });
 };

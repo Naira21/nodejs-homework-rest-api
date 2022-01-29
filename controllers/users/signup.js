@@ -1,5 +1,5 @@
 import AuthService from "../../service/auth/index.js";
-
+import { EmailService, SengridSender } from "../../service/email/index.js";
 const authService = new AuthService();
 
 export const signup = async (req, res, next) => {
@@ -15,6 +15,12 @@ export const signup = async (req, res, next) => {
     });
   }
   const data = await authService.create(req.body);
+  const emailService = new EmailService(
+    process.env.SENDGRID_API_KEY,
+    new SengridSender()
+  );
+  await emailService.sendVerifyEmail(email, data.name, data.verificationToken);
+  delete data.verificationToken;
   res.status(201).json({
     Status: "201 Created",
     ContentType: "application/json",

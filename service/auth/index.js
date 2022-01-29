@@ -10,19 +10,21 @@ const secret = process.env.SECRET;
 
 class AuthService {
   async create(body) {
-    const { id, email, subscription, avatar } = await createUser(body);
+    const { id, email, subscription, avatar, verificationToken } =
+      await createUser(body);
     return {
       id,
       email,
       subscription,
       avatar,
+      verificationToken,
     };
   }
 
   async getUser(email, password) {
     const user = await findByEmail(email);
     const isValidPassword = await user?.isValidPassword(password);
-    if (!isValidPassword) {
+    if (!isValidPassword || !user?.verify) {
       return null;
     }
     return user;

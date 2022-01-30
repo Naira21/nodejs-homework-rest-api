@@ -1,7 +1,6 @@
-// import { use } from "express/lib/application";
 import Mailgen from "mailgen";
 
-export default class EmailService {
+export class EmailService {
   constructor(env, sender) {
     this.sender = sender;
     switch (env) {
@@ -12,7 +11,7 @@ export default class EmailService {
         this.link = "http://localhost:5000";
         break;
       case "prod":
-        this.link = "http://heroku/";
+        this.link = "http://heroku";
         break;
       default:
         this.link = "http://localhost:3000";
@@ -46,6 +45,7 @@ export default class EmailService {
     };
     return mailGenerator.generate(email);
   }
+
   async sendVerifyEmail(email, username, verifyToken) {
     const emailBody = this.createEmailTemplate(username, verifyToken);
     const message = {
@@ -53,12 +53,14 @@ export default class EmailService {
       subject: "Email veryfication",
       html: emailBody,
     };
+
     try {
       const result = await this.sender.send(message);
       console.log(result);
       return true;
     } catch (error) {
       console.error(error.message);
+      return false;
     }
   }
 }

@@ -1,6 +1,6 @@
 import { LocalStorage, FileStorage } from "../../service/storages/index.js";
 
-const uploadAvatar = async (req, res, next) => {
+export const uploadAvatar = async (req, res, next) => {
   const uploadService = new FileStorage(LocalStorage, req.file, req.user);
 
   const avatarURL = await uploadService.updateAvatar();
@@ -11,4 +11,3 @@ const uploadAvatar = async (req, res, next) => {
     ResponseBody: { avatarURL },
   });
 };
-export default uploadAvatar;

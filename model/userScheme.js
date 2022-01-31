@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import gravatar from "gravatar";
+import { v4 as uuidv4 } from "uuid";
+
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
@@ -28,6 +30,15 @@ const userSchema = new Schema(
       default: function () {
         return gravatar.url(this.email, { s: "250" }, true);
       },
+    },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required"],
+      default: uuidv4(),
     },
   },
   {
